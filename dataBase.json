@@ -1,65 +1,51 @@
 [
   {
-    "Acceleration": "(0.2945557, 0.3231201, 0.8963623)",
-    "Temperature": "32.19397",
-    "Pressure": "98943.24",
-    "Relative-Humidity": "41.45865",
-    "Luminosity": "(3, 5)"
+    "Acceleration": "(0.06652832, 0.04272461, 0.9863281)",
+    "Temperature": "36.73069",
+    "Pressure": "99112.5",
+    "Relative-Humidity": "34.56168",
+    "Luminosity": "(28, 22)"
   },
   {
-    "Acceleration": "(0.2839355, 0.4891357, 0.8087158)",
-    "Temperature": "32.14034",
-    "Pressure": "98938.0",
-    "Relative-Humidity": "54.89401",
-    "Luminosity": "(8, 12)"
+    "Acceleration": "(-0.0177002, 0.05004883, 0.9884033)",
+    "Temperature": "36.26951",
+    "Pressure": "99110.75",
+    "Relative-Humidity": "36.56821",
+    "Luminosity": "(36, 29)"
   },
   {
-    "Acceleration": "(0.3530273, 0.4899902, 0.7790527)",
-    "Temperature": "32.076",
-    "Pressure": "98938.75",
-    "Relative-Humidity": "61.66129",
-    "Luminosity": "(10, 16)"
+    "Acceleration": "(-0.02282715, 0.05224609, 0.9735107)",
+    "Temperature": "36.29096",
+    "Pressure": "99110.75",
+    "Relative-Humidity": "37.04886",
+    "Luminosity": "(38, 32)"
   },
   {
-    "Acceleration": "(0.4815674, 0.3123779, 0.8133545)",
-    "Temperature": "32.91255",
-    "Pressure": "98951.5",
-    "Relative-Humidity": "34.92026",
-    "Luminosity": "(40, 37)"
+    "Acceleration": "(0.04833984, 0.0435791, 0.9835205)",
+    "Temperature": "37.43855",
+    "Pressure": "99135.0",
+    "Relative-Humidity": "29.06851",
+    "Luminosity": "(21, 19)"
   },
   {
-    "Acceleration": "(0.5379639, 0.2619629, 0.7825928)",
-    "Temperature": "32.5479",
-    "Pressure": "98948.25",
-    "Relative-Humidity": "42.24448",
-    "Luminosity": "(4, 6)"
+    "Acceleration": "(0.04418945, 0.04711914, 0.9857178)",
+    "Temperature": "37.52434",
+    "Pressure": "99133.5",
+    "Relative-Humidity": "28.59549",
+    "Luminosity": "(18, 16)"
   },
   {
-    "Acceleration": "(0.5079346, 0.2851563, 0.800415)",
-    "Temperature": "32.38703",
-    "Pressure": "98947.5",
-    "Relative-Humidity": "46.34146",
-    "Luminosity": "(5, 8)"
+    "Acceleration": "(-0.02575684, 0.03320313, 0.9886475)",
+    "Temperature": "37.33129",
+    "Pressure": "99143.25",
+    "Relative-Humidity": "27.37479",
+    "Luminosity": "(29, 21)"
   },
   {
-    "Acceleration": "(-0.02282715, 0.02258301, 0.9859619)",
-    "Temperature": "29.813",
-    "Pressure": "98957.0",
-    "Relative-Humidity": "43.25156",
-    "Luminosity": "(23, 25)"
-  },
-  {
-    "Acceleration": "(-0.0234375, 0.02514648, 0.9893799)",
-    "Temperature": "29.7272",
-    "Pressure": "98954.0",
-    "Relative-Humidity": "46.85263",
-    "Luminosity": "(19, 22)"
-  },
-  {
-    "Acceleration": "(-0.02563477, 0.02319336, 0.9865723)",
-    "Temperature": "29.24457",
-    "Pressure": "98957.75",
-    "Relative-Humidity": "49.08804",
-    "Luminosity": "(39, 41)"
+    "Acceleration": "(-0.02331543, 0.03515625, 0.9855957)",
+    "Temperature": "37.20259",
+    "Pressure": "99144.5",
+    "Relative-Humidity": "27.58078",
+    "Luminosity": "(29, 21)"
   }
 ]
