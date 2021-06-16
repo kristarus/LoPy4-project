@@ -1,0 +1,23 @@
+[
+  {
+    "Acceleration": "(0.2945557, 0.3231201, 0.8963623)",
+    "Temperature": "32.19397",
+    "Pressure": "98943.24",
+    "Relative-Humidity": "41.45865",
+    "Luminosity": "(3, 5)"
+  },
+  {
+    "Acceleration": "(0.2839355, 0.4891357, 0.8087158)",
+    "Temperature": "32.14034",
+    "Pressure": "98938.0",
+    "Relative-Humidity": "54.89401",
+    "Luminosity": "(8, 12)"
+  },
+  {
+    "Acceleration": "(0.3530273, 0.4899902, 0.7790527)",
+    "Temperature": "32.076",
+    "Pressure": "98938.75",
+    "Relative-Humidity": "61.66129",
+    "Luminosity": "(10, 16)"
+  }
+]
