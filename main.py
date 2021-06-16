@@ -16,26 +16,35 @@ li = LIS2HH12(py)
 mpp = MPL3115A2(py, mode=PRESSURE)
 
 btn = Pin('P14', mode=Pin.IN)
-isBtnPressed = False
 
+isBtnPressed = False
 pycom.heartbeat(False)
 
-while True:
+
+def writeData(file="dataBase.json"):
+    with open(file, 'r+') as f:
+        fileSize = os.stat(file)[6]
+        if(fileSize == 0):
+            f.write(json.dumps([{"Pressure": str(mpp.pressure()), "Temperature": str(si.temperature()), "Relative-Humidity": str(si.humidity()),
+                                 "Acceleration": str(li.acceleration()), "Luminosity": str(lt.light())}]))
+        else:
+            f.seek(fileSize - 1)
+            f.write(',\n')
+            f.write(json.dumps({"Pressure": str(mpp.pressure()), "Temperature": str(si.temperature()), "Relative-Humidity": str(si.humidity()),
+                                "Acceleration": str(li.acceleration()), "Luminosity": str(lt.light())}))
+            f.write('\n]')
+
+
+def checkButton(isBtnPressed):
     if (btn.value() == 0 and isBtnPressed == False):
         pycom.rgbled(0x00FF00)  # green
-        with open("dataBase.json", 'r+') as f:
-            if(os.stat("dataBase.json")[6] == 0):
-                f.write(json.dumps([{"Pressure": str(mpp.pressure()), "Temperature": str(si.temperature()), "Relative-Humidity": str(si.humidity()),
-                                     "Acceleration": str(li.acceleration()), "Luminosity": str(lt.light())}]))
-            else:
-                fileEnd = int(os.stat("dataBase.json")[6])
-                f.seek(fileEnd - 1)
-                f.write(',\n')
-                f.write(json.dumps({"Pressure": str(mpp.pressure()), "Temperature": str(si.temperature()), "Relative-Humidity": str(si.humidity()),
-                                    "Acceleration": str(li.acceleration()), "Luminosity": str(lt.light())}))
-                f.write('\n]')
+        writeData("dataBase.json")
         isBtnPressed = True
         print('Data entered into the database')
     if (btn.value() == 1 and isBtnPressed == True):
         pycom.rgbled(0x000000)  # without light
         isBtnPressed = False
+
+
+while True:
+    checkButton(isBtnPressed)
