@@ -43,6 +43,9 @@ class SI7006A20:
         data = self._getWord(data[0], data[1])
         temp = ((175.72 * data) / 65536.0) - 46.85
         return temp
+    
+    def get_temperature(self):
+        return {"ID": "0", "Units": "deg C", "Name": "Sens Value", "Value": self.temperature()}
 
     def humidity(self):
         """ obtaining the relative humidity(%) measured by sensor """
@@ -52,6 +55,9 @@ class SI7006A20:
         data = self._getWord(data[0], data[1])
         humidity = ((125.0 * data) / 65536.0) - 6.0
         return humidity
+
+    def get_humidity(self):
+        return {"ID": "0", "Units": "%RH", "Name": "Sens Value", "Value": self.humidity()}
 
     def read_user_reg(self):
         """ reading the user configuration register """
