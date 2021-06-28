@@ -86,3 +86,6 @@ class LTR329ALS01:
 
     def get_luminosity_red(self):
         return {"ID": "0", "Units": "lx", "Name": "Red Sens Value", "Value": self.light()[1]}
+
+    def get_luminosity(self):
+        return {"Name": "Luminosity", "Resource Definitions": {self.get_luminosity_blue()["ID"]: self.get_humidity_params(), self.get_luminosity_red()["ID"]: self.get_luminosity_red()}}
