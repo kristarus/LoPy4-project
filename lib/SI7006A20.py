@@ -14,6 +14,7 @@ import math
 
 __version__ = '0.0.2'
 
+
 class SI7006A20:
     """ class for handling the temperature sensor SI7006-A20
         +/- 1 deg C error for temperature
@@ -25,7 +26,7 @@ class SI7006A20:
     TEMP_NOHOLDMASTER = const(0xF3)
     HUMD_NOHOLDMASTER = const(0xF5)
 
-    def __init__(self, pysense = None, sda = 'P22', scl = 'P21'):
+    def __init__(self, pysense=None, sda='P22', scl='P21'):
         if pysense is not None:
             self.i2c = pysense.i2c
         else:
@@ -43,9 +44,12 @@ class SI7006A20:
         data = self._getWord(data[0], data[1])
         temp = ((175.72 * data) / 65536.0) - 46.85
         return temp
-    
-    def get_temperature(self):
+
+    def get_temperature_params(self):
         return {"ID": "0", "Units": "deg C", "Name": "Sens Value", "Value": self.temperature()}
+
+    def get_temprature(self):
+        return {"Name": "Temperature", "Resource Definitions": {self.get_temperature_params()["ID"]: self.get_temperature_params()}}
 
     def humidity(self):
         """ obtaining the relative humidity(%) measured by sensor """
@@ -56,8 +60,11 @@ class SI7006A20:
         humidity = ((125.0 * data) / 65536.0) - 6.0
         return humidity
 
-    def get_humidity(self):
+    def get_humidity_params(self):
         return {"ID": "0", "Units": "%RH", "Name": "Sens Value", "Value": self.humidity()}
+
+    def get_humidity(self):
+        return {"Name": "Humidity", "Resource Definitions": {self.get_humidity_params()["ID"]: self.get_humidity_params()}}
 
     def read_user_reg(self):
         """ reading the user configuration register """
@@ -75,18 +82,21 @@ class SI7006A20:
 
     def read_electronic_id(self):
         """ reading electronic identifier """
-        self.i2c.writeto(SI7006A20_I2C_ADDR, bytearray([0xFA]) + bytearray([0x0F]))
+        self.i2c.writeto(SI7006A20_I2C_ADDR, bytearray(
+            [0xFA]) + bytearray([0x0F]))
         time.sleep(0.5)
         sna = self.i2c.readfrom(SI7006A20_I2C_ADDR, 4)
         time.sleep(0.1)
-        self.i2c.writeto(SI7006A20_I2C_ADDR, bytearray([0xFC]) + bytearray([0xC9]))
+        self.i2c.writeto(SI7006A20_I2C_ADDR, bytearray(
+            [0xFC]) + bytearray([0xC9]))
         time.sleep(0.5)
         snb = self.i2c.readfrom(SI7006A20_I2C_ADDR, 4)
         return [sna[0], sna[1], sna[2], sna[3], snb[0], snb[1], snb[2], snb[3]]
 
     def read_firmware(self):
         """ reading firmware version """
-        self.i2c.writeto(SI7006A20_I2C_ADDR, bytearray([0x84])+ bytearray([0xB8]))
+        self.i2c.writeto(SI7006A20_I2C_ADDR, bytearray(
+            [0x84]) + bytearray([0xB8]))
         time.sleep(0.5)
         fw = self.i2c.readfrom(SI7006A20_I2C_ADDR, 1)
         return fw[0]
@@ -100,7 +110,8 @@ class SI7006A20:
 
     def write_reg(self, reg_addr, value):
         """ writing a register """
-        self.i2c.writeto(SI7006A20_I2C_ADDR, bytearray([reg_addr])+bytearray([value]))
+        self.i2c.writeto(SI7006A20_I2C_ADDR, bytearray(
+            [reg_addr])+bytearray([value]))
         time.sleep(0.1)
 
     def dew_point(self):
@@ -108,11 +119,12 @@ class SI7006A20:
             at dew-point temperature the relative humidity is 100% """
         temp = self.temperature()
         humid = self.humidity()
-        h = (math.log(humid, 10) - 2) / 0.4343 + (17.62 * temp) / (243.12 + temp)
+        h = (math.log(humid, 10) - 2) / 0.4343 + \
+            (17.62 * temp) / (243.12 + temp)
         dew_p = 243.12 * h / (17.62 - h)
         return dew_p
 
-    def humid_ambient(self, t_ambient, dew_p = None):
+    def humid_ambient(self, t_ambient, dew_p=None):
         """ returns the relative humidity compensated for the current Ambient temperature
             for ex: T-Ambient is 24.4 degC, but sensor indicates Temperature = 31.65 degC and Humidity = 47.3%
                     -> then the actual Relative Humidity is 72.2%
@@ -120,5 +132,6 @@ class SI7006A20:
         if dew_p is None:
             dew_p = self.dew_point()
         h = 17.62 * dew_p / (243.12 + dew_p)
-        h_ambient = math.pow(10, (h - (17.62 * t_ambient) / (243.12 + t_ambient)) * 0.4343 + 2)
+        h_ambient = math.pow(
+            10, (h - (17.62 * t_ambient) / (243.12 + t_ambient)) * 0.4343 + 2)
         return h_ambient

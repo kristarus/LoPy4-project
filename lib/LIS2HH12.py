@@ -102,6 +102,9 @@ class LIS2HH12:
     def get_acceleration_z(self):
         return {"ID": "3", "Units": "m", "Name": "Z Value", "Value": self.acceleration()[2]}
 
+    def get_acceleration(self):
+        return {"Name": "Acceleration", "Resource Definitions": {self.get_acceleration_x()["ID"]: self.get_acceleration_x(), self.get_acceleration_y()["ID"]: self.get_acceleration_y(), self.get_acceleration_z()["ID"]: self.get_acceleration_z()}}
+
     def roll(self):
         x, y, z = self.acceleration()
         rad = math.atan2(-x, z)
