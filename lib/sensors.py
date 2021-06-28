@@ -28,10 +28,12 @@ class Sensors:
         logging.info("Reading data from sensors")
         try:
             sens = [self.mpp.get_pressure(), self.si.get_temperature(
-            ), self.si.get_humidity(), self.li.get_acceleration, self.lt.get_luminosity]
+            ), self.si.get_humidity(), self.li.get_acceleration(), self.lt.get_luminosity()]
+            print(sens)
             data = {}
             for i in range(0, 4):
                 data[str(i)] = sens[i]
+            print(data)
             return data
 
         except:

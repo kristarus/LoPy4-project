@@ -82,10 +82,28 @@ class LTR329ALS01:
         return (data0, data1)
 
     def get_luminosity_blue(self):
-        return {"ID": "0", "Units": "lx", "Name": "Blue Sens Value", "Value": self.light()[0]}
+        try:
+            data = {"ID": "0", "Units": "lx", "Name": "Blue Sens Value", "Value": self.light()[
+                0]}
+        except:
+            print("Cannot read luminosity blue params")
+        else:
+            return data
 
     def get_luminosity_red(self):
-        return {"ID": "0", "Units": "lx", "Name": "Red Sens Value", "Value": self.light()[1]}
+        try:
+            data = {"ID": "0", "Units": "lx", "Name": "Red Sens Value", "Value": self.light()[
+                1]}
+        except:
+            print("Cannot read luminosity red params")
+        else:
+            return data
 
     def get_luminosity(self):
-        return {"Name": "Luminosity", "Resource Definitions": {self.get_luminosity_blue()["ID"]: self.get_humidity_params(), self.get_luminosity_red()["ID"]: self.get_luminosity_red()}}
+        try:
+            data = {"Name": "Luminosity", "Resource Definitions": {self.get_luminosity_blue(
+            )["ID"]: self.get_luminosity_blue(), self.get_luminosity_red()["ID"]: self.get_luminosity_red()}}
+        except:
+            print("Cannot read luminosity")
+        else:
+            return data

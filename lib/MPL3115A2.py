@@ -115,10 +115,22 @@ class MPL3115A2:
         return float((OUT_P_MSB[0] << 10) + (OUT_P_CSB[0] << 2) + ((OUT_P_LSB[0] >> 6) & 0x03) + ((OUT_P_LSB[0] >> 4) & 0x03) / 4.0)
 
     def get_pressure_params(self):
-        return {"ID": "0", "Units": "mm", "Name": "Sens Value", "Value": self.pressure()}
+        try:
+            data = {"ID": "0", "Units": "mm",
+                    "Name": "Sens Value", "Value": self.pressure()}
+        except:
+            print("Cannot read pressure params")
+        else:
+            return data
 
     def get_pressure(self):
-        return {"Name": "Pressure", "Resource Definitions": {self.get_pressure_params()["ID"]: self.get_pressure_params()}}
+        try:
+            data = {"Name": "Pressure", "Resource Definitions": {
+                self.get_pressure_params()["ID"]: self.get_pressure_params()}}
+        except:
+            print("Cannot read pressure")
+        else:
+            return data
 
     def altitude(self):
         if self.mode == PRESSURE:

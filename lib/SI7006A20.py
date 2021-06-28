@@ -46,10 +46,22 @@ class SI7006A20:
         return temp
 
     def get_temperature_params(self):
-        return {"ID": "0", "Units": "deg C", "Name": "Sens Value", "Value": self.temperature()}
+        try:
+            data = {"ID": "0", "Units": "deg C",
+                    "Name": "Sens Value", "Value": self.temperature()}
+        except:
+            print("Cannot read temperature params")
+        else:
+            return data
 
-    def get_temprature(self):
-        return {"Name": "Temperature", "Resource Definitions": {self.get_temperature_params()["ID"]: self.get_temperature_params()}}
+    def get_temperature(self):
+        try:
+            data = {"Name": "Temperature", "Resource Definitions": {
+                self.get_temperature_params()["ID"]: self.get_temperature_params()}}
+        except:
+            print("Cannot read temperature")
+        else:
+            return data
 
     def humidity(self):
         """ obtaining the relative humidity(%) measured by sensor """
@@ -61,10 +73,20 @@ class SI7006A20:
         return humidity
 
     def get_humidity_params(self):
-        return {"ID": "0", "Units": "%RH", "Name": "Sens Value", "Value": self.humidity()}
+        try:
+            data = {"ID": "0", "Units": "%RH",
+                    "Name": "Sens Value", "Value": self.humidity()}
+        except:
+            print("Cannot read humidity params")
+        else:
+            return data
 
     def get_humidity(self):
-        return {"Name": "Humidity", "Resource Definitions": {self.get_humidity_params()["ID"]: self.get_humidity_params()}}
+        try:
+            data = {"Name": "Humidity", "Resource Definitions": {
+                self.get_humidity_params()["ID"]: self.get_humidity_params()}}
+        except:
+            print("Cannot read humidity")
 
     def read_user_reg(self):
         """ reading the user configuration register """
