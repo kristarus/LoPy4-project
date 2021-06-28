@@ -94,16 +94,40 @@ class LIS2HH12:
         return (self.x[0] * _mult, self.y[0] * _mult, self.z[0] * _mult)
 
     def get_acceleration_x(self):
-        return {"ID": "1", "Units": "m", "Name": "X Value", "Value": self.acceleration()[0]}
+        try:
+            data = {"ID": "1", "Units": "m", "Name": "X Value", "Value": self.acceleration()[
+                0]}
+        except:
+            print("Cannot read acceleration x params")
+        else:
+            return data
 
     def get_acceleration_y(self):
-        return {"ID": "2", "Units": "m", "Name": "Y Value", "Value": self.acceleration()[1]}
+        try:
+            data = {"ID": "2", "Units": "m", "Name": "Y Value", "Value": self.acceleration()[
+                1]}
+        except:
+            print("Cannot read acceleration y params")
+        else:
+            return data
 
     def get_acceleration_z(self):
-        return {"ID": "3", "Units": "m", "Name": "Z Value", "Value": self.acceleration()[2]}
+        try:
+            data = {"ID": "3", "Units": "m", "Name": "Z Value", "Value": self.acceleration()[
+                2]}
+        except:
+            print("Cannot read acceleration z params")
+        else:
+            return data
 
     def get_acceleration(self):
-        return {"Name": "Acceleration", "Resource Definitions": {self.get_acceleration_x()["ID"]: self.get_acceleration_x(), self.get_acceleration_y()["ID"]: self.get_acceleration_y(), self.get_acceleration_z()["ID"]: self.get_acceleration_z()}}
+        try:
+            data = {"Name": "Acceleration", "Resource Definitions": {self.get_acceleration_x()["ID"]: self.get_acceleration_x(
+            ), self.get_acceleration_y()["ID"]: self.get_acceleration_y(), self.get_acceleration_z()["ID"]: self.get_acceleration_z()}}
+        except:
+            print("Cannot read acceleration")
+        else:
+            return data
 
     def roll(self):
         x, y, z = self.acceleration()
