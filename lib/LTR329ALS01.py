@@ -83,7 +83,7 @@ class LTR329ALS01:
 
     def get_luminosity_blue(self):
         try:
-            data = {"ID": "0", "Units": "lx", "Name": "Blue Sens Value", "Value": self.light()[
+            data = {"ID": "4", "Units": "lx", "Name": "Blue Sens Value", "Value": self.light()[
                 0]}
         except:
             print("Cannot read luminosity blue params")
@@ -92,7 +92,7 @@ class LTR329ALS01:
 
     def get_luminosity_red(self):
         try:
-            data = {"ID": "0", "Units": "lx", "Name": "Red Sens Value", "Value": self.light()[
+            data = {"ID": "5", "Units": "lx", "Name": "Red Sens Value", "Value": self.light()[
                 1]}
         except:
             print("Cannot read luminosity red params")
