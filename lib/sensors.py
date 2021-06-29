@@ -29,11 +29,9 @@ class Sensors:
         try:
             sens = [self.mpp.get_pressure(), self.si.get_temperature(
             ), self.si.get_humidity(), self.li.get_acceleration(), self.lt.get_luminosity()]
-            print(sens)
             data = {}
             for i in range(0, 4):
                 data[str(i)] = sens[i]
-            print(data)
             return data
 
         except:
@@ -52,14 +50,19 @@ class Sensors:
             logging.info("Data transforming completed")
             return json_data
 
-    def send_sensors_data(self, host, port):
+    def send_sensors_data(self):
         json_data = self.get_json_sensors_data()
         client_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        logging.info('Connection to %s' % str((host, port)))
-        client_sock.connect((host, port))
-        logging.info('Got a connection from %s' % str((host, port)))
-        logging.info('Sending data ')
-        client_sock.sendall(json_data)
-        data = client_sock.recv(1024)
-        client_sock.close()
-        logging.info('Data is received')
+        logging.info('Connection to %s' % str((self.host, self.port)))
+        try:
+            client_sock.connect((self.host, self.port))
+        except OSError:
+            logging.error("System error - unable to connect")
+        else:
+            logging.info('Got a connection from %s' %
+                         str((self.host, self.port)))
+            logging.info('Sending data ')
+            client_sock.sendall(json_data.encode(encoding='utf-8'))
+            data = client_sock.recv(1024)
+            client_sock.close()
+            logging.info('Data is received')
