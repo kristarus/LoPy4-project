@@ -63,6 +63,5 @@ class Sensors:
                          str((self.host, self.port)))
             logging.info('Sending data ')
             client_sock.sendall(json_data.encode(encoding='utf-8'))
-            data = client_sock.recv(1024)
             client_sock.close()
             logging.info('Data is received')
